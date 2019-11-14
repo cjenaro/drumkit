@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Drum kit!</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="keys">
+      <div data-key="65" class="key">
+        <kbd>A</kbd>
+        <span class="sound">🐵</span>
+      </div>
+      <div data-key="83" class="key">
+        <kbd>S</kbd>
+        <span class="sound">🐶</span>
+      </div>
+      <div data-key="68" class="key">
+        <kbd>D</kbd>
+        <span class="sound">🐮</span>
+      </div>
+      <div data-key="70" class="key">
+        <kbd>F</kbd>
+        <span class="sound">🦊</span>
+      </div>
+      <div data-key="71" class="key">
+        <kbd>G</kbd>
+        <span class="sound">🐱</span>
+      </div>
+      <div data-key="72" class="key">
+        <kbd>H</kbd>
+        <span class="sound">🐷</span>
+      </div>
+      <div data-key="74" class="key">
+        <kbd>J</kbd>
+        <span class="sound">🦁</span>
+      </div>
+      <div data-key="75" class="key">
+        <kbd>K</kbd>
+        <span class="sound">🐸</span>
+      </div>
+      <div data-key="76" class="key">
+        <kbd>L</kbd>
+        <span class="sound">🐴</span>
+      </div>
+    </div>
+
+    <audio data-key="65" src="animal-sounds/monkey.wav"></audio>
+    <audio data-key="83" src="animal-sounds/dog.wav"></audio>
+    <audio data-key="68" src="animal-sounds/cow.wav"></audio>
+    <audio data-key="70" src="animal-sounds/fox.wav"></audio>
+    <audio data-key="71" src="animal-sounds/cat.wav"></audio>
+    <audio data-key="72" src="animal-sounds/pig.wav"></audio>
+    <audio data-key="74" src="animal-sounds/lion.wav"></audio>
+    <audio data-key="75" src="animal-sounds/frog.wav"></audio>
+    <audio data-key="76" src="animal-sounds/horse.wav"></audio>
+  </body>
+
+  <script>
+    window.addEventListener('keydown', event => {
+      const keys = document.querySelectorAll('.key')
+      const key = document.querySelector(`.key[data-key="${event.keyCode}"]`)
+      const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`)
+      if (!!audio) {
+        audio.currentTime = 0
+        audio.play()
+        audio.onended = e => {
+          key.classList.remove('playing')
+        }
+        key.classList.add('playing')
+      }
+    })
+  </script>
+</html>
